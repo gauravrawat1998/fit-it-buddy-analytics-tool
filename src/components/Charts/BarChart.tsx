@@ -81,13 +81,13 @@ const BarChart: React.FC<BarChartProps> = ({ data, title }) => {
               dataKey="previous" 
               fill="url(#previousGradient)"
               radius={[4, 4, 0, 0]}
-              // name={selectedYear - 1}
+              name={selectedYear - 1}
             />
             <Bar 
               dataKey="current" 
               fill="url(#currentGradient)"
               radius={[4, 4, 0, 0]}
-              // name={selectedYear}
+              name={selectedYear}
             />
             <defs>
               <linearGradient id="currentGradient" x1="0" y1="0" x2="0" y2="1">

@@ -19,12 +19,7 @@ const Dashboard = () => {
   );
 
   const [metrics, setMetrics] = useState<Array<any>>([]);
-  const [barChartData, setBarChartData] = useState<Array<object>>([
-    { name: "Revenue", current: 125000, previous: 118000 },
-    { name: "Rev PAR", current: 89.5, previous: 85.2 },
-    { name: "Occupancy", current: 78.5, previous: 82.1 },
-    { name: "ADR", current: 156.8, previous: 148.9 },
-  ]);
+  const [barChartData, setBarChartData] = useState<Array<object>>();
 
   const lineChartData = [
     { month: "Jan", current: 110000, previous: 105000 },
@@ -102,7 +97,7 @@ const Dashboard = () => {
             growth: calculateGrowth(currentData.ADR, previousDataRow?.ADR),
             icon: "adr",
           },
-        ]
+        ];
         setMetrics(tempMetrics);
 
         const data = [
@@ -118,8 +113,8 @@ const Dashboard = () => {
           },
           {
             name: "Occupancy",
-            current: currentData.Occupancy * 100 + "%",
-            previous: previousDataRow?.Occupancy * 100 + "%",
+            current: (currentData.Occupancy * 100)?.toFixed(2) + "%",
+            previous: (previousDataRow?.Occupancy * 100).toFixed(2) + "%",
           },
           {
             name: "ADR",
@@ -198,7 +193,10 @@ const Dashboard = () => {
                 </span>
               </button>
               <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                <Filter className="w-4 h-4" onClick={() => navigate("/excel-ready")} />
+                <Filter
+                  className="w-4 h-4"
+                  onClick={() => navigate("/excel-ready")}
+                />
                 <span className="text-sm font-medium">Filter</span>
               </button>
             </div>
@@ -245,25 +243,8 @@ const Dashboard = () => {
                     Revenue Growth
                   </span>
                   <span className="text-sm font-bold text-green-900">
-                    +{metrics[0]?.growth.toFixed(1)}%
-                  </span>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                  <span className="text-sm font-medium text-blue-800">
-                    ADR Improvement
-                  </span>
-                  <span className="text-sm font-bold text-blue-900">
-                    +{metrics[3]?.growth.toFixed(1)}%
-                  </span>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
-                  <span className="text-sm font-medium text-purple-800">
-                    Rev PAR Growth
-                  </span>
-                  <span className="text-sm font-bold text-purple-900">
-                    +{metrics[1]?.growth.toFixed(1)}%
+                    {metrics[0]?.growth >= 0 ? "+" : ""}
+                    {metrics[0]?.growth.toFixed(1)}%
                   </span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
@@ -273,6 +254,26 @@ const Dashboard = () => {
                   <span className="text-sm font-bold text-orange-900">
                     {metrics[2]?.growth >= 0 ? "+" : ""}
                     {metrics[2]?.growth.toFixed(1)}%
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                  <span className="text-sm font-medium text-purple-800">
+                    Rev PAR Growth
+                  </span>
+                  <span className="text-sm font-bold text-purple-900">
+                    {metrics[1]?.growth >= 0 ? "+" : ""}
+                    {metrics[1]?.growth.toFixed(1)}%
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                  <span className="text-sm font-medium text-blue-800">
+                    ADR Improvement
+                  </span>
+                  <span className="text-sm font-bold text-blue-900">
+                    {metrics[3]?.growth >= 0 ? "+" : ""}
+                    {metrics[3]?.growth.toFixed(1)}%
                   </span>
                 </div>
               </div>

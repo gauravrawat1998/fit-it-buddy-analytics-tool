@@ -64,11 +64,12 @@ const ExcelReady = () => {
     if (selectedCompany) {
       const years = getAvailableYears(data, selectedCompany);
       dispatch(setAvailableYears(years));
-      if (selectedYear) {
-        dispatch(setSelectedYear(selectedYear));
-      } else {
+      // if (selectedYear) {
+      //   dispatch(setSelectedYear(selectedYear));
+      // } else {
         dispatch(setSelectedYear(""));
-      }
+        dispatch(setSelectedMonth(""));
+      // }
     }
   }, [selectedCompany]);
 
