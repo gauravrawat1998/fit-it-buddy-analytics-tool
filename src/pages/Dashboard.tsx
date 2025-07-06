@@ -133,23 +133,24 @@ const Dashboard = () => {
   };
 
   const handleExport = () => {
-    const exportData = {
-      filters: { selectedCompany, selectedYear, selectedMonth },
-      metrics,
-      excelData,
-      fileName,
-      generated: new Date().toISOString(),
-    };
+    window.print()
+    // const exportData = {
+    //   filters: { selectedCompany, selectedYear, selectedMonth },
+    //   metrics,
+    //   excelData,
+    //   fileName,
+    //   generated: new Date().toISOString(),
+    // };
 
-    const blob = new Blob([JSON.stringify(exportData, null, 2)], {
-      type: "application/json",
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `dashboard-export-${Date.now()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    // const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+    //   type: "application/json",
+    // });
+    // const url = URL.createObjectURL(blob);
+    // const a = document.createElement("a");
+    // a.href = url;
+    // a.download = `dashboard-export-${Date.now()}.json`;
+    // a.click();
+    // URL.revokeObjectURL(url);
   };
 
   return (
